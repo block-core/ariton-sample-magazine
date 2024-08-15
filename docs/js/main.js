@@ -176,8 +176,8 @@
         console.log(web5, userDid);
 
 		const response = await web5.dwn.records.query({
-            // from: 'did:dht:bi3bzoke6rq6fbkojpo5ebtg45eqx1owqrb4esex8t9nz14ugnao',
-			from: 'did:dht:1ko4cqh7c7i9z56r7qwucgpbra934rngc5eyffg1km5k6rc5991o',
+            from: 'did:dht:bi3bzoke6rq6fbkojpo5ebtg45eqx1owqrb4esex8t9nz14ugnao',
+			// from: 'did:dht:1ko4cqh7c7i9z56r7qwucgpbra934rngc5eyffg1km5k6rc5991o',
             message: {
               filter: {
                 protocol: 'https://schema.ariton.app/text',
@@ -203,7 +203,8 @@
 
 			clonedTemplate.querySelector('.img-responsive').src = record.tags.image;
 			clonedTemplate.querySelector('.article-link').innerText = record.tags.title;
-			
+			clonedTemplate.querySelector('.article-date').innerText = new Date(record.dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
 			// Modify the cloned template as needed
 			// For example, if the template has a child element with class 'content', you can modify its text content
 			// clonedTemplate.querySelector('.content').textContent = // record.data.json().content;
