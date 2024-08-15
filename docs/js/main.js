@@ -171,6 +171,53 @@
 
 	};
 
+	var initializeWeb5 = async function() {
+		const { web5, did: userDid } = await Web5.Web5.connect();
+        console.log(web5, userDid);
+
+		const response = await web5.dwn.records.query({
+            // from: 'did:dht:bi3bzoke6rq6fbkojpo5ebtg45eqx1owqrb4esex8t9nz14ugnao',
+			from: 'did:dht:1ko4cqh7c7i9z56r7qwucgpbra934rngc5eyffg1km5k6rc5991o',
+            message: {
+              filter: {
+                protocol: 'https://schema.ariton.app/text',
+                protocolPath: "entry",
+                schema: 'https://schema.ariton.app/text/schema/entry',
+                dataFormat: 'application/json',
+              },
+            },
+          });
+
+          console.log("response from query", response);
+
+		  const template = document.getElementById('template');
+		  const parentElement = document.getElementById('articles');
+
+		  for (const record of response.records) {
+			// We only retrieve the data for read-more.
+			// const data = record.data.json();
+			const clonedTemplate = template.cloneNode(true);
+
+			// Remove a class by name from the cloned template
+			clonedTemplate.classList.remove('hidden');
+
+			clonedTemplate.querySelector('.img-responsive').src = record.tags.image;
+			clonedTemplate.querySelector('.article-link').innerText = record.tags.title;
+			
+			// Modify the cloned template as needed
+			// For example, if the template has a child element with class 'content', you can modify its text content
+			// clonedTemplate.querySelector('.content').textContent = // record.data.json().content;
+
+			// Append the cloned template to the parent element
+			parentElement.insertBefore(clonedTemplate, parentElement.firstChild);
+		  }
+
+		  template.classList.add('hidden');
+
+		// Animations
+		contentWayPoint();
+	};
+
 
 	// Document on load.
 	$(function(){
@@ -179,10 +226,7 @@
 		burgerMenu();
 		scrolledWindow();
 		
-		// Animations
-		contentWayPoint();
-		
-		
+		initializeWeb5();
 
 	});
 
