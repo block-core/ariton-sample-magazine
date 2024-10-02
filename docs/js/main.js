@@ -175,8 +175,11 @@
 		const { web5, did: userDid } = await Web5.Web5.connect();
         console.log(web5, userDid);
 
+		const urlParams = new URLSearchParams(window.location.search);
+		const did = urlParams.get('did');	
+
 		const response = await web5.dwn.records.query({
-            from: 'did:dht:bi3bzoke6rq6fbkojpo5ebtg45eqx1owqrb4esex8t9nz14ugnao',
+            from: did,
 			// from: 'did:dht:1ko4cqh7c7i9z56r7qwucgpbra934rngc5eyffg1km5k6rc5991o',
             message: {
               filter: {
