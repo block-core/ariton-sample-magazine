@@ -204,8 +204,14 @@
 			// Remove a class by name from the cloned template
 			clonedTemplate.classList.remove('hidden');
 
-			clonedTemplate.querySelector('.img-responsive').src = record.tags.image;
-			clonedTemplate.querySelector('.article-link').innerText = record.tags.title;
+			const data = await record.data.json();
+			console.log("data", data);
+
+			clonedTemplate.querySelector('.img-responsive').src = data.image;
+			clonedTemplate.querySelector('.article-link').innerText = data.title;
+
+			// clonedTemplate.querySelector('.img-responsive').src = record.tags.image;
+			// clonedTemplate.querySelector('.article-link').innerText = record.tags.title;
 			clonedTemplate.querySelector('.article-date').innerText = new Date(record.dateModified).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
 			// Modify the cloned template as needed
