@@ -209,6 +209,7 @@
 
 			clonedTemplate.querySelector('.img-responsive').src = data.image;
 			clonedTemplate.querySelector('.article-link').innerText = data.title;
+			clonedTemplate.querySelector('.article-categories').innerText = data.labels.join(', ');
 
 			// clonedTemplate.querySelector('.img-responsive').src = record.tags.image;
 			// clonedTemplate.querySelector('.article-link').innerText = record.tags.title;
